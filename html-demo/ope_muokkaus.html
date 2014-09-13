@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Sanaston muokkaus</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/bootstrap-theme.css" rel="stylesheet">
+        <link href="../css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="40" colspan="3" scope="col"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><h1>Sanakysely</h1></td>
+                <td width="150" align="center"><button type="submit" class="btn btn-info" onclick="location.href='index.html'">Kirjaudu ulos</button></td>
+            </tr>
+            <tr>
+                <td height="40" colspan="3" scope="col"></td>
+            </tr>
+            <tr>
+                <td width="40%">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active"><a href="#"><b>Sanaston muokkaus</b></a></li>
+                        <li><a href="ope_sanastot.html"><b>Takaisin</b></a></li>                        
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td  height="40" colspan="3"></td>
+            </tr>
+            <tr>
+                <td>Olet valinnut muokattavaksi sanaston <b>se-ja-se</b><br>
+                Sanaston tiedot: <b>liirum laarum</b></td>
+            </tr>
+            <tr>
+                <td height="40" colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="3"><table width="80%" border="1" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th scope="col">
+                        <div class="container">
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Sana:</th>
+                                        <th>Käännös:</th>
+                                        <th>Sanaluokka:</th>
+                                        <th>Artikkeli:</th>
+                                        <th>Taivutus:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>computer</td>
+                                        <td>tietokone</td>
+                                        <td>substantiivi</td>
+                                        <td>a</td>
+                                        <td></td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-wrench"></span> Muokkaa</button></td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-remove"></span> Poista</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>kissa</td>
+                                        <td>katt</td>
+                                        <td>substantiivi</td>
+                                        <td>en</td>
+                                        <td>en katt, katten, katter, katterna</td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-wrench"></span> Muokkaa</button></td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-remove"></span> Poista</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>difficult</td>
+                                        <td>vaikea</td>
+                                        <td>adjektiivi</td>
+                                        <td></td>
+                                        <td></td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-wrench"></span> Muokkaa</button></td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-remove"></span> Poista</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        </th>
+                        <th scope="col">
+                            <button type="submit" class="btn btn-default">Lisää sana</button> 
+                        </th>
+            </tr>
+        </table></td>
+        
+</tr>
+</table>
+Seuraava lomake saadaan painamalla 'Lisää sana'-painiketta:        
+<table width="90%" align="center" border="1" cellspacing="0" cellpadding="0">        
+              <tr>
+               
+                        <tr>
+                            <th scope="col">
+                        <div class="container">     
+        
+                    <table width="30%" border="0" cellspacing="0" cellpadding="0">
+                        <td style="width:20%">                       
+
+                            <div class="container">
+
+                                <form class="form-horizontal" role="form" action="lomake.html" method="POST">
+                                    <div class="form-group form-group-lg">
+                                        <div class="row">
+
+                                            <label for="inputSana" class="col-xs-2 control-label">Sana:</label>
+
+                                            <div class="col-xs-2">
+                                                <input type="text" class="form-control" id="inputSana" name="sana" placeholder="sana">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputKaannos" class="col-xs-2 control-label">Käännös:</label>
+
+                                            <div class="col-xs-2">
+                                                <input type="text" class="form-control" id="inputPassword1" name="kaannos" placeholder="käännös">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputSanaluokka" class="col-xs-2 control-label">Sanaluokka:</label>
+
+                                            <div class="col-xs-2">
+                                                <input type="text" class="form-control" id="inputPassword1" name="sanaluokka" placeholder="sanaluokka">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputArtikkeli" class="col-xs-2 control-label">Artikkeli:</label>
+
+                                            <div class="col-xs-2">
+                                                <input type="text" class="form-control" id="inputPassword1" name="artikkeli" placeholder="artikkeli">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputTaivutus" class="col-xs-2 control-label">Taivutus:</label>
+
+                                            <div class="col-xs-2">
+                                                <input type="text" class="form-control" id="inputPassword1" name="taivutus" placeholder="taivutus">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <button type="submit" class="btn btn-default">Tallenna sanastoon</button>                                                
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </form>
+
+
+                            </div>
+
+
+
+
+                        </td>
+
+                    </table>
+    </table>    
+        
+</body>
+</html>

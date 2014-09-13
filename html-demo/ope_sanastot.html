@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>Opettajan etusivu</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <link href="../css/bootstrap.css" rel="stylesheet">
+        <link href="../css/bootstrap-theme.css" rel="stylesheet">
+        <link href="../css/main.css" rel="stylesheet">
+    </head>
+    <body>
+        <table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <td height="40" colspan="3" scope="col"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><h1>Sanakysely</h1></td>
+                <td width="150" align="center"><button type="submit" class="btn btn-info" onclick="location.href='index.html'">Kirjaudu ulos</button>
+                
+                </td>
+            </tr>
+            <tr>
+                <td height="40" colspan="3" scope="col"></td>
+            </tr>
+            <tr>
+                <td width="50%">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active"><a href=""><b>Sanastojen hallinta</b></a></li>
+                        <li><a href="ope_tulokset.html"><b>Oppilaiden tulokset</b></a></li>                        
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td  height="40" colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Opettaja se-ja-se, valitse listalta sanasto muokkaamista varten tai luo uusi sanasto:</td>               
+            </tr>
+            <tr>
+                <td height="40" colspan="3"></td>
+            </tr>
+            <tr>
+                <td colspan="3"><table width="80%" border="1" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <th scope="col">
+                        <div class="container">
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Sanasto:</th>
+                                        <th>Kielet:</th>
+                                        <th>Sanojen määrä:</th>
+                                        <th>Luotu:</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Tietotekniikka 2</td>
+                                        <td>eng - suo</td>
+                                        <td>62</td>
+                                        <td>6.2.2014</td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-hand-up"></span> Muokkaa</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Matkailu 1</td>
+                                        <td>ruo - suo</td>
+                                        <td>34</td>
+                                        <td>6.2.2014</td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-hand-up"></span> Muokkaa</button></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Adjektiivit 1</td>
+                                        <td>eng - suo</td>
+                                        <td>100</td>
+                                        <td>6.2.2014</td>
+                                        <td><button type="button" class="btn btn-xs btn-default"><span class="glyphicon glyphicon-hand-up"></span> Muokkaa</button></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        </th>
+                        <th scope="col">
+                            <button type="submit" class="btn btn-default">Lisää sanasto</button>
+                        </th>
+            </tr>
+        </table></td>
+</tr>
+</table>
+        
+Seuraava lomake saadaan painamalla 'Lisää sanasto'-painiketta:        
+<table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">        
+              <tr>
+               
+                        <tr>
+                            <th scope="col">
+                        <div class="container">     
+        
+                    <table width="30%" border="0" cellspacing="0" cellpadding="0">
+                        <td style="width:20%">                       
+
+                            <div class="container">
+
+                                <form class="form-horizontal" role="form" action="lomake.html" method="POST">
+                                    <div class="form-group form-group-lg">
+                                        <div class="row">
+
+                                            <label for="inputSanasto" class="col-xs-2 control-label">Sanasto:</label>
+
+                                            <div class="col-xs-2">
+                                                <input type="text" class="form-control" id="inputSanasto" name="sana" placeholder="sanasto">
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputKielet" class="col-xs-2 control-label">Kielet:</label>
+
+                                            <div class="col-xs-2">
+                                                <input type="text" class="form-control" id="inputKielet" name="kielet" placeholder="kielet">
+                                            </div>
+
+                                        
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <button type="submit" class="btn btn-default">Tallenna sanasto</button>                                                
+                                            </div>
+                                        </div>
+                                    </div>  
+                                </form>
+
+
+                            </div>
+
+
+
+
+                        </td>
+
+                    </table>
+    </table>            
+        
+</body>
+</html>
