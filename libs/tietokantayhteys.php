@@ -2,13 +2,13 @@
 
 /** Funktio joka palauttaa yhteyden tietokantaan PDO-oliona. */
 function getTietokantayhteys() {
-  //Muuttuja, jonka sisältö säilyy getTietokantayhteys-kutsujen välillä.
+  //Muuttuja, jonka sisÃ¤ltÃ¶ sÃ¤ilyy getTietokantayhteys-kutsujen vÃ¤lillÃ¤.
   static $yhteys = null; 
   
-  //Jos $yhteys on null, pitää se muodostaa.
+  //Jos $yhteys on null, pitÃ¤Ã¤ se muodostaa.
   if ($yhteys == null) { 
-    //Tämä koodi suoritetaan vain kerran, sillä seuraavilla 
-    //funktion suorituskerroilla $yhteys-muuttujassa on sisältöä.
+    //tÃ¤mÃ¤ koodi suoritetaan vain kerran, sillÃ¤ seuraavilla 
+    //funktion suorituskerroilla $yhteys-muuttujassa on sisÃ¤ltÃ¤Ã¤.
     $yhteys = new PDO('pgsql:');
     $yhteys->setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTION);
   }
