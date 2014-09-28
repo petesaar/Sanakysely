@@ -1,0 +1,18 @@
+INSERT INTO sana VALUES (0, 'blue', 'eng-suo', 'sininen', '', 'substantiivi','');
+INSERT INTO sana VALUES (1, 'red', 'eng-suo', 'punainen', '', 'substantiivi','');
+INSERT INTO sana VALUES (2, 'yellow', 'eng-suo', 'keltainen', '', 'substantiivi','');
+INSERT INTO sana VALUES (3, 'green', 'eng-suo', 'vihreä', '', 'substantiivi','');
+INSERT INTO sana VALUES (4, 'black', 'eng-suo', 'musta', '', 'substantiivi','');
+INSERT INTO sana VALUES (5, 'white', 'eng-suo', 'valkoinen', '', 'substantiivi','');
+INSERT INTO sana VALUES (6, 'driver', 'eng-suo', 'ajuri', '', 'substantiivi','');
+INSERT INTO sana VALUES (7, 'byte', 'eng-suo', 'tavu', '', 'substantiivi','');
+INSERT INTO sana VALUES (8, 'motherboard', 'eng-suo', 'emolevy', '', 'substantiivi','');
+INSERT INTO sana VALUES (9, 'hard drive', 'eng-suo', 'kiintolevy', '', 'substantiivi','');
+INSERT INTO sana VALUES (10, 'broadband', 'eng-suo', 'laajakaista', '', 'substantiivi','');
+INSERT INTO sana VALUES (11, 'square root', 'eng-suo', 'neliöjuuri', '', 'substantiivi','');
+INSERT INTO sana VALUES (12, 'derivative', 'eng-suo', 'derivaatta', '', 'substantiivi','');
+INSERT INTO sana VALUES (13, 'number theory', 'eng-suo', 'lukuteoria', '', 'substantiivi','');
+INSERT INTO sana VALUES (14, 'vector', 'eng-suo', 'vektori', '', 'substantiivi','');
+INSERT INTO sana VALUES (15, 'prime number', 'eng-suo', 'alkuluku', '', 'substantiivi','');
+INSERT INTO sana VALUES (16, 'induction', 'eng-suo', 'induktio', '', 'substantiivi','');
+INSERT INTO sana VALUES (17, 'probability integral', 'eng-suo', 'kertymäfunktio', '', 'substantiivi','');

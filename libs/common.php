@@ -19,3 +19,8 @@ function onkoKirjautunut() {
         return false;
     }
 }
+
+function putsaaString($s) { 
+     return htmlspecialchars(trim($s)); 
+ } 
+

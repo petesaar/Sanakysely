@@ -1,7 +1,7 @@
 <?php
 require 'libs/tietokantayhteys.php';
 require_once 'libs/models/oppilas.php';
-$sql = "SELECT oppilastunnus, nimi, salasana from oppilas";
+$sql = "SELECT oppilastunnus, nimi, salasana, tehdyt, viimeksi from oppilas";
 $kysely = getTietokantayhteys()->prepare($sql);
 $kysely->execute();
 
@@ -21,7 +21,7 @@ $tulokset = array();
 echo "taalla";
 $kysely->execute();
 foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
-    $oppilas = new Oppilas();
+    $oppilas = new Oppilas($tulos->oppilastunnus, $tulos->nimi, $tulos->salasana, $tulos->tehdyt, $tulos->viimeksi);
     $oppilas->setOppilastunnus($tulos->oppilastunnus);
     $oppilas->setNimi($tulos->nimi);
     $oppilas->setSalasana($tulos->salasana);
@@ -38,7 +38,7 @@ foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
         <h1>Oppilasluettelo</h1>
         <ul>
             <?php foreach ($tulokset as $asia) { ?>
-                <li><?php echo $asia->getNimi() . "  Salasana: " . $asia->getSalasana(); ?></li>
+                <li><?php echo $asia->getOppilastunnus() . ",  nimi: " . $asia->getNimi() . ",  salasana: " . $asia->getSalasana(); ?></li>
             <?php } ?>
         </ul>
     </body>

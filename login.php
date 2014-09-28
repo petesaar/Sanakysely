@@ -1,4 +1,4 @@
-<?php
+/<?php
   require_once 'libs/common.php';
   
 $pohja = 'kirjautumispohja.php';  

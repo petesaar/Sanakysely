@@ -5,18 +5,16 @@ class Oppilas {
   private $oppilastunnus;
   private $nimi;
   private $salasana;
-  private $tulos;
+  private $tehdyt;
   private $viimeksi;
 
-  public function __construct($oppilastunnus, $nimi, $salasana, $tulos, $viimeksi) {
+  public function __construct($oppilastunnus, $nimi, $salasana, $tehdyt, $viimeksi) {
     $this->oppilastunnus = $oppilastunnus;
     $this->nimi = $nimi;
     $this->salasana = $salasana;
-    $this->tulos = $tulos;
+    $this->tehdyt = $tehdyt;
     $this->viimeksi = $viimeksi;
   }
-
-  /* Kirjoita tähän gettereitä ja settereitä */
 
   public function getOppilastunnus() {
     return $this->oppilastunnus;
@@ -26,8 +24,12 @@ class Oppilas {
     return $this->nimi;
   }
 
-  public function getTulos() {
-    return $this->tulos;
+  public function getSalasana() {
+    return $this->salasana;
+  }
+
+  public function getTehdyt() {
+    return $this->tehdyt;
   }
   
   public function getViimeksi() {
@@ -50,10 +52,11 @@ class Oppilas {
     $this->viimeksi = $viimeksi;
   }
   
-    public function setTulos($tulos) {
-    $this->tulos = $tulos;
+    public function setTehdyt($tehdyt) {
+    $this->tehdyt = $tehdyt;
   }
-  
+ 
+/* Haetaan kannasta kaikki oppilas-rivit */
   public function getKaikkiOppilaat() {
       $sql = "SELECT oppilastunnus, nimi, salasana, tehdyt, viimeksi from oppilas ORDER BY oppilastunnus";
       $kysely = getTietokantayhteys()->prepare($sql); 
@@ -67,17 +70,13 @@ class Oppilas {
        $tulokset[] = $oppilas; 
      } 
      return $tulokset; 
-   } 
+   }
 
-    
-
-
-/* Etsitään kannasta käyttäjätunnuksella ja salasanalla käyttäjäriviä */
+/* Etsitään kannasta käyttäjäriviä nimellä ja salasanalla */
   public static function etsiOppilasTunnuksilla($kayttaja, $salasana) {
     $sql = "SELECT oppilastunnus, nimi, salasana, tehdyt, viimeksi from oppilas where nimi = ? AND salasana = ? LIMIT 1";
     $kysely = getTietokantayhteys()->prepare($sql);
-    $kysely->execute(array($kayttaja, $salasana));
-    
+    $kysely->execute(array($kayttaja, $salasana));    
     
     $tulos = $kysely->fetchObject();
     if ($tulos == null) {
@@ -92,9 +91,8 @@ class Oppilas {
       return $henkilo;
     }
   }
-
-
-
+  
+  /* Etsitään kannasta oppilas-riviä id:llä*/
    public static function etsiOppilas($oppilastunnus) { 
      $sql = "SELECT oppilastunnus, nimi, salasana, tehdyt, viimeksi from oppilas where oppilastunnus = ? LIMIT 1"; 
     $kysely = getTietokantayhteys()->prepare($sql); 

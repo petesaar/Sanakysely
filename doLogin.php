@@ -2,6 +2,7 @@
 
 require_once 'libs/common.php';
 require 'libs/models/oppilas.php';
+require 'libs/models/opettaja.php';
 $pohja = 'kirjautumispohja.php';
 $sivu = 'kirjautumislomake.php';
 
@@ -10,7 +11,7 @@ if (empty($_POST["tunnari"])) {
         'virhe' => "Kirjautuminen epäonnistui! Et antanut käyttäjätunnusta.",
     ));
 }
-$kayttaja = $_POST["tunnari"];
+$kayttaja = putsaaString($_POST["tunnari"]);
 
 if (empty($_POST["ssana"])) {
     naytaNakyma($pohja, $sivu, array(
@@ -18,19 +19,21 @@ if (empty($_POST["ssana"])) {
         'virhe' => "Kirjautuminen epäonnistui! Et antanut salasanaa.",
     ));
 }
-$salasana = $_POST["ssana"];
+$salasana = putsaaString($_POST["ssana"]);
 
-$henkilo = Oppilas::etsiOppilasTunnuksilla($kayttaja, $salasana);
+$pupil = Oppilas::etsiOppilasTunnuksilla($kayttaja, $salasana);
+$teacher = Opettaja::etsiOpettajaTunnuksilla($kayttaja, $salasana);
 
-  if ($henkilo != null) {
+  if ($teacher != null) {
   //Tallennetaan istuntoon käyttäjäolio
-  $_SESSION['kirjautunut'] = serialize($henkilo);  
-  $pohja = 'opp_pohja.php';
-  $sivu = 'opp_sanastot.php';
-  naytaNakyma($pohja, $sivu, array(
-      'testikentta' => "(Muut painikkeet kuin 'Kirjaudu ulos' eivät toimi vielä!)",
-  ));
-    
+  $_SESSION['kirjautunut'] = serialize($teacher);    
+  header('Location: muokkaus.php');
+  
+  } elseif ($pupil != null) {      
+  //Tallennetaan istuntoon käyttäjäolio
+  $_SESSION['kirjautunut'] = serialize($pupil);  
+  header('Location: kysely.php');  
+  
 } else {
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen ja virheen. */
     naytaNakyma($pohja, $sivu, array(

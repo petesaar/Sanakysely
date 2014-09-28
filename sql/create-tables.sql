@@ -13,8 +13,8 @@ kohde varchar(30),
 kieli varchar(9),
 kaannos varchar(30),
 taivutus varchar(50),
-sluokka integer,
-artikkeli integer
+sluokka varchar(15),
+artikkeli varchar(5)
 );
 
 CREATE TABLE sanasto
@@ -24,13 +24,14 @@ nimi varchar(80),
 kieli varchar(12),
 kuvaus varchar(200),
 maara int,
+tehty date,
 opetunnus integer references opettaja(opettajatunnus)
 );
 
 CREATE TABLE kuuluu
 (
-sanatunnus integer references sana(sanatunnus),
-sanastotunnus integer references sanasto(sanastotunnus) 
+sanatunnus integer references sana(sanatunnus) ON DELETE cascade,
+sanastotunnus integer references sanasto(sanastotunnus) ON DELETE cascade 
 );
 
 CREATE TABLE oppilas
@@ -39,7 +40,7 @@ oppilastunnus SERIAL PRIMARY KEY NOT NULL,
 nimi varchar(80),
 salasana varchar(12),
 tehdyt integer,
-viimeksi timestamp
+viimeksi date
 );
 
 CREATE TABLE tentti
@@ -53,7 +54,7 @@ CREATE TABLE tulos
 (
 tulostunnus SERIAL PRIMARY KEY NOT NULL,
 yritykset integer,
-viimeksi timestamp,
+viimeksi date,
 oppilastunnus integer references oppilas(oppilastunnus),
 tenttitunnus integer references tentti(tenttitunnus)  
 );
