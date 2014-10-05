@@ -32,7 +32,7 @@ $teacher = Opettaja::etsiOpettajaTunnuksilla($kayttaja, $salasana);
   } elseif ($pupil != null) {      
   //Tallennetaan istuntoon käyttäjäolio
   $_SESSION['kirjautunut'] = serialize($pupil);  
-  header('Location: kysely.php');  
+  header('Location: etusivu.php');  
   
 } else {
     /* Väärän tunnuksen syöttänyt saa eteensä kirjautumislomakkeen ja virheen. */

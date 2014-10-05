@@ -34,7 +34,6 @@
                         <input type="text" class="form-control" name = "sanastonKielet" placeholder="Kielet" value="<?php echo $data->sanasto->getKieli(); ?>">
                     </div>
                     <br>
-
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
                             <button type="submit" class="btn btn-default" name = "tallennaSanastonMuutoksetNappi" >Tallenna muutokset</button>                             

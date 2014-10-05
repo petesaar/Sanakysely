@@ -3,7 +3,7 @@
         <div class="btn-group">
 
             <button type="button" class="btn btn-default" disabled="disabled">Sanastojen hallinta</button>
-            <button type="button" class="btn btn-default">Oppilaiden tulokset</button>
+            <button type="submit" class="btn btn-default" onclick="alert('Tämä toiminto on vielä työn alla!')">Oppilaiden tulokset</button>
         </div>
     </td>
 </tr> 
@@ -13,7 +13,7 @@
 <tr>
     <td colspan="3">Opettaja <?php echo $kirjautunut->getNimi(); ?>, valitse listalta sanasto muokkaamista varten tai luo uusi sanasto:</td> 
 <tr>
-    <td><font color="blue">(Huom. arvioija! Viikon 4 palautuksessa täysi CRUD-nelikko on toteutettu tietokohteelle 'sanasto'. Yksittäisiin sanoihin toimivat vasta selaus- ja lisäystoiminnot!)</font> </td>    
+    <td><font color="blue">(Huom. arvioija! Viikon 5 palautuksessa täydet CRUD-nelikot on toteutettu tietokohteille 'sanasto' ja  'sana'. Oppilaan puolen toiminnot ovat vielä kesken.)</font> </td>    
 </tr>
 </tr>
 <tr>

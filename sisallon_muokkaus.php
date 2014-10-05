@@ -12,23 +12,25 @@
   $sanalista = Sana::getSanastonSanat($valittu_sanasto->getSanastotunnus());
   $teksti = "kokeilu";
     
-  if (isset($_GET['poistoNappi'])) {
-    $valittu = Sanasto::etsiSanasto($_GET['poistoNappi']);
-    $teksti = $valittu->getKuvaus();
+  if (isset($_GET['sananPoistoNappi'])) {
+    $valittu = Sana::etsiSana($_GET['sananPoistoNappi']);
+    $teksti = $valittu->getKohde();
     $valittu->poistaKannasta();
-    $_SESSION['ilmoitus'] = "Sanasto poistettu onnistuneesti.";
-    header('Location: muokkaus.php');
+    $valittu_sanasto->paivitaKantaanLkm('-1');
+    $_SESSION['ilmoitus'] = "Sana poistettu onnistuneesti.";
+    header('Location: sisallon_muokkaus.php');
   }
   
-  if (isset($_GET['muokkausNappi'])) {
-    $valittu = Sanasto::etsiSanasto($_GET['muokkausNappi']);
-    $teksti = $valittu->getKuvaus();
-    
-      naytaNakyma($pohja, $sivu, array(
-      'testikentta' => $teksti,
-      'sanastot' => $sanastoLista,
-      'opet' => $opet,
-  ));
+  if (isset($_GET['sananMuokkausNappi'])) {
+    $valittu = Sana::etsiSana($_GET['sananMuokkausNappi']);
+    $teksti = $valittu->getKohde();
+    $_SESSION['muokattava_sana'] = $valittu->getSanatunnus();
+    header('Location: sanan_muutos.php');
+      //naytaNakyma($pohja, $sivu, array(
+      //'testikentta' => $teksti,
+      //'sanastot' => $sanastoLista,
+      //'opet' => $opet,
+  //));
   }
   
   if (isset($_GET['sanastonPaivitysNappi'])) {

@@ -49,7 +49,7 @@ class Sana {
         $this->kohde = $kohde;
 
         if (trim($this->kohde) == '' || strlen($this->kohde) > 30) {
-            $this->virheet['kohde'] = "Kohde ei saa olla tyhjä eikä siinä saa olla enempää kuin 30 merkkiä.";
+            $this->virheet['kohde'] = "Sana-valinta ei saa olla tyhjä eikä siinä saa olla enempää kuin 30 merkkiä.";
         } else {
             unset($this->virheet['kohde']);
         }
@@ -59,7 +59,7 @@ class Sana {
         $this->kieli = $kieli;
 
         if (trim($this->kieli) == '' || strlen($this->kieli) > 12) {
-            $this->virheet['kieli'] = "Kielivalinta ei saa olla tyhjä eikä siinä saa olla enempää kuin 12 merkkiä.";
+            $this->virheet['kieli'] = "Kielet-valinta ei saa olla tyhjä eikä siinä saa olla enempää kuin 12 merkkiä.";
         } else {
             unset($this->virheet['kieli']);
         }
@@ -69,7 +69,7 @@ class Sana {
         $this->kaannos = $kaannos;
 
         if (trim($this->kaannos) == '' || strlen($this->kaannos) > 30) {
-            $this->virheet['kaannos'] = "Kaannosvalinta ei saa olla tyhjä eikä siinä saa olla enempää kuin 30 merkkiä.";
+            $this->virheet['kaannos'] = "Käännös-valinta ei saa olla tyhjä eikä siinä saa olla enempää kuin 30 merkkiä.";
         } else {
             unset($this->virheet['kaannos']);
         }
@@ -79,7 +79,7 @@ class Sana {
         $this->taivutus = $taivutus;
 
         if (strlen($this->taivutus) > 50) {
-            $this->virheet['taivutus'] = "Taivutusvalinnassa ei saa olla enempää kuin 50 merkkiä.";
+            $this->virheet['taivutus'] = "Taivutus-valinnassa ei saa olla enempää kuin 50 merkkiä.";
         } else {
             unset($this->virheet['taivutus']);
         }
@@ -89,7 +89,7 @@ class Sana {
         $this->sluokka = $sluokka;
 
         if (trim($this->sluokka) == '' || strlen($this->sluokka) > 15) {
-            $this->virheet['sluokka'] = "Sanaluokkavalinta ei saa olla tyhjä eikä siinä saa olla enempää kuin 15 merkkiä.";
+            $this->virheet['sluokka'] = "Sanaluokka-valinta ei saa olla tyhjä eikä siinä saa olla enempää kuin 15 merkkiä.";
         } else {
             unset($this->virheet['sluokka']);
         }
@@ -132,9 +132,10 @@ class Sana {
     /* Haetaan kannasta kaikki sana-rivit */
 
     public static function getSanastonSanat($sanastotunnus) {
-        $sql = "SELECT sana.sanatunnus, kohde, sana.kieli, kaannos, taivutus, sluokka, artikkeli FROM kuuluu JOIN sana ON sana.sanatunnus = kuuluu.sanatunnus JOIN sanasto ON sanasto.sanastotunnus = kuuluu.sanastotunnus WHERE kuuluu.sanastotunnus = ?";
+        $sql = "SELECT sana.sanatunnus, kohde, sana.kieli, kaannos, taivutus, sluokka, artikkeli FROM kuuluu "
+                . "JOIN sana ON sana.sanatunnus = kuuluu.sanatunnus JOIN sanasto ON sanasto.sanastotunnus = kuuluu.sanastotunnus WHERE kuuluu.sanastotunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $kysely->execute(array($sanastotunnus));        
+        $kysely->execute(array($sanastotunnus));
 
         $tulokset = array();
         foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
@@ -151,6 +152,7 @@ class Sana {
         }
         return $tulokset;
     }
+
     /* Etsitään suurin sanatunnus */
 
     public static function etsiSuurin() {
@@ -163,21 +165,70 @@ class Sana {
         }
         return $suurin;
     }
- 
-        /* Tallennetaan uusi sanasto tietokantaan */
 
-    public function lisaaKantaan($sanastoId) {
-        
+    /* Etsitään kannasta sanasto-riviä id:llä */
+
+    public static function etsiSana($sanatunnus) {
+        $sql = "SELECT sanatunnus, kohde, kieli, kaannos, taivutus, sluokka, artikkeli FROM sana WHERE sanatunnus = ? LIMIT 1";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($sanatunnus));
+
+        $tulos = $kysely->fetchObject();
+        if ($tulos->sanatunnus == null) {
+            return null;
+        } else {
+            $sana = new Sana();
+            $sana->setSanatunnus($tulos->sanatunnus);
+            $sana->setKohde($tulos->kohde);
+            $sana->setKieli($tulos->kieli);
+            $sana->setKaannos($tulos->kaannos);
+            $sana->setTaivutus($tulos->taivutus);
+            $sana->setSluokka($tulos->sluokka);
+            $sana->setArtikkeli($tulos->artikkeli);
+            $tulokset[] = $sana;
+
+            return $sana;
+        }
+    }
+
+    /* Tallennetaan uusi sanasto tietokantaan */
+
+    public function lisaaKantaan($sanaId) {
+
         $sql = "INSERT INTO sana(sanatunnus, kohde, kieli, kaannos, taivutus, sluokka, artikkeli) VALUES(?,?,?,?,?,?,?)";
-        $kysely = getTietokantayhteys()->prepare($sql);        
+        $kysely = getTietokantayhteys()->prepare($sql);
         $ok = $kysely->execute(array($this->getSanatunnus(), $this->getKohde(), $this->getKieli(), $this->getKaannos(), $this->getTaivutus(), $this->getSluokka(), $this->getArtikkeli()));
-        
+
         $sql = "INSERT INTO kuuluu (sanatunnus, sanastotunnus) VALUES(?,?)";
-        $kysely = getTietokantayhteys()->prepare($sql);        
-        $ok = $kysely->execute(array($this->getSanatunnus(), $sanastoId));
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $ok = $kysely->execute(array($this->getSanatunnus(), $sanaId));
         return $ok;
     }
-        /* Palauttaa true, jos Sanaan syötetyt arvot ovat järkeviä. */
+
+    /* Tallennetaan sanan muuttuneet tiedot */
+    
+    public function paivitaKantaan() {
+        $sql = "UPDATE sana SET kohde = ?, kieli = ?, kaannos= ?, taivutus= ?, sluokka= ?, artikkeli= ? WHERE sanatunnus = ?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $ok = $kysely->execute(array($this->getKohde(), $this->getKieli(), $this->getKaannos(), $this->getTaivutus(), $this->getSluokka(), $this->getArtikkeli(), $this->getSanatunnus()));
+
+        return $ok;
+    }
+    
+    /* Poistetaan sana */
+
+    public function poistaKannasta() {
+        $sql = "DELETE FROM sana WHERE sanatunnus=?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $kysely->execute(array($this->getSanatunnus()));        
+        
+        $sql = "DELETE FROM kuuluu WHERE sanatunnus=?";
+        $kysely = getTietokantayhteys()->prepare($sql);
+        $ok = $kysely->execute(array($this->getSanatunnus()));
+        return $ok;
+    }
+
+    /* Palauttaa true, jos Sanaan syötetyt arvot ovat järkeviä. */
 
     public function onkoKelvollinen() {
         return empty($this->virheet);
@@ -188,4 +239,5 @@ class Sana {
     public function getVirheet() {
         return $this->virheet;
     }
+
 }

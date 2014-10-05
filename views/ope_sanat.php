@@ -3,7 +3,7 @@
         <div class="btn-group">
 
             <button type="button" class="btn btn-default" onclick="location.href = 'muokkaus.php'">Sanastojen hallinta</button>
-            <button type="button" class="btn btn-default">Oppilaiden tulokset</button>
+            <button type="submit" class="btn btn-default" onclick="alert('Tämä toiminto on vielä työn alla!')">Oppilaiden tulokset</button>
         </div>
     </td>
 </tr> 
@@ -11,7 +11,7 @@
     <td  height="40" colspan="3"></td>
 </tr>
 <tr>
-    <td>Opettaja <?php echo $kirjautunut->getNimi(); ?>, olet valinnut muokattavaksi sanaston <b>nro <?php echo $data->valittu_sanasto->getSanastotunnus(); ?></b>, nimeltään <b><?php echo $data->valittu_sanasto->getNimi(); ?></b>.Voit muuttaa sen tietoja painamalla oheisesta napista.  
+    <td>Opettaja <?php echo $kirjautunut->getNimi(); ?>, olet valinnut muokattavaksi sanaston <b>nro <?php echo $data->valittu_sanasto->getSanastotunnus(); ?></b>, nimeltään <b><?php echo $data->valittu_sanasto->getNimi(); ?></b>.Voit muuttaa sen tietoja painamalla oheista nappia.  
     <td align="left""><form method="GET"><button type="submit" name="sanastonPaivitysNappi" value="<?php echo $data->valittu_sanasto->getSanastotunnus(); ?>" class="btn btn-xs btn-info" formaction="sisallon_muokkaus.php" >Päivitä tiedot</button></form>
     </td></td> 
 <tr><br>
@@ -63,10 +63,10 @@
                                 <td><?php echo $word->getSluokka(); ?></td>
                                 <td><?php echo $word->getArtikkeli(); ?></td>
                         <form method="GET"> 
-                            <td><button type="submit" name="muokkausNappi" value="<?php echo $word->getSanatunnus(); ?>" class="btn btn-xs btn-info" formaction="sisallon_muokkaus.php" >Muokkaa</button></td> 
+                            <td><button type="submit" name="sananMuokkausNappi" value="<?php echo $word->getSanatunnus(); ?>" class="btn btn-xs btn-info" formaction="sisallon_muokkaus.php" >Muokkaa</button></td> 
                         </form> 
-                        <form method="GET" onsubmit="return confirm('Haluatko varmasti poistaa sanan? Operaatiota ei voida enää perua!')"> 
-                            <td><button type="submit" name="poistoNappi" value="<?php echo $word->getSanatunnus(); ?>" class="btn btn-xs btn-danger" formaction="sisallon_muokkaus.php" >Poista</button></td> 
+                        <form method="GET" onsubmit="return confirm('Haluatko varmasti poistaa sanan?')"> 
+                            <td><button type="submit" name="sananPoistoNappi" value="<?php echo $word->getSanatunnus(); ?>" class="btn btn-xs btn-danger" formaction="sisallon_muokkaus.php" >Poista</button></td> 
                         </form> 
                         </tr>
                     <?php endforeach; ?>                                    

@@ -146,6 +146,8 @@ class Sanasto {
         return $ok;
     }
     
+    /* Tallennetaan sanaston muuttuneet tiedot */
+    
     public function paivitaKantaan() {
         $sql = "UPDATE sanasto SET nimi = ?, kieli = ?, kuvaus= ? WHERE sanastotunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -154,13 +156,17 @@ class Sanasto {
         return $ok;   
     }
     
-     public function paivitaKantaanLkm() {
+    /* Tallennetaan sanaston sanojen muuttunut lukumäärä */
+    
+     public function paivitaKantaanLkm($muutos) {
         $sql = "UPDATE sanasto SET maara = ? WHERE sanastotunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
-        $ok = $kysely->execute(array($this->getMaara()+1, $this->getSanastotunnus()));
+        $ok = $kysely->execute(array($this->getMaara()+$muutos, $this->getSanastotunnus()));
         
         return $ok;   
-    }   
+    } 
+    
+    /* Poistetaan sanasto */
     
     public function poistaKannasta() {
         $sql = "DELETE FROM sanasto WHERE sanastotunnus=?";

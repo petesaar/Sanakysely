@@ -7,6 +7,8 @@ class Oppilas {
   private $salasana;
   private $tehdyt;
   private $viimeksi;
+  
+  /* kuormitettu konstruktori */
 
   public function __construct($oppilastunnus, $nimi, $salasana, $tehdyt, $viimeksi) {
     $this->oppilastunnus = $oppilastunnus;

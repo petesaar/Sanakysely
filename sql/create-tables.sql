@@ -46,7 +46,9 @@ viimeksi date
 CREATE TABLE tentti
 (
 tenttitunnus SERIAL PRIMARY KEY NOT NULL,
-tiedetyt integer[],
+suunta boolean,
+tulos integer,
+aika timestamp,
 oppilastunnus integer references oppilas(oppilastunnus) 
 );
 
@@ -61,6 +63,6 @@ tenttitunnus integer references tentti(tenttitunnus)
 
 CREATE TABLE tenttii
 (
-tenttitunnus integer references tentti(tenttitunnus),
-sanastotunnus integer references sanasto(sanastotunnus) 
+tenttitunnus integer references tentti(tenttitunnus) ON DELETE cascade,
+sanastotunnus integer references sanasto(sanastotunnus) ON DELETE cascade 
 );
