@@ -2,17 +2,18 @@
     <td width="50%">
         <form role="form" method="POST">
         <div class="btn-group">
-            <button type="button" class="btn btn-default" disabled="disabled">Sanastot</button>
-            <button type="submit" class="btn btn-default" formaction='omat_tulokset.php'>Katso tulokset</button>
+
+            <button type="submit" class="btn btn-default" formaction='muokkaus.php'>Sanastojen hallinta</button>
+            <button type="submit" class="btn btn-default" formaction='oppilaat.php'>Oppilaiden tulokset</button>
         </div>
         </form>
     </td>
-</tr>
+</tr> 
 <tr>
     <td  height="40" colspan="3"></td>
 </tr>
 <tr>
-    <td colspan="3">Oppilas <?php echo $kirjautunut->getNimi(); ?>, valitse listalta sanasto, jota haluaisit harjoitella:</td>               
+    <td colspan="3">Opettaja <?php echo $kirjautunut->getNimi(); ?>, tässä ovat oppilaan <?php echo $data->oppilas->getNimi(); ?> suoritustiedot:</td>
 </tr>
 <tr>
     <td height="40" colspan="3">
@@ -36,13 +37,13 @@
 
                 <table class="table table-striped">                                
                     <thead>
-                        <tr>
+                        <tr>                            
                             <th>#</th>
                             <th>Sanasto:</th>
                             <th>Kielet:</th>
-                            <th>Sanoja:</th>
-                            <th>Kuvaus:</th>
-                            <th>Tehty:</th>                           
+                            <th>Yrityksiä:</th>
+                            <th>Sanoja:</th>                            
+                            <th>Paras tulos:</th>                                                                
                         </tr>
                     </thead>
                     <tbody>
@@ -51,13 +52,10 @@
                                 <td><?php echo $voc->getSanastotunnus(); ?></td>
                                 <td><?php echo $voc->getNimi(); ?></td>
                                 <td><?php echo $voc->getKieli(); ?></td>
-                                <td><?php echo $voc->getMaara(); ?></td>
-                                <td><?php echo $voc->getKuvaus(); ?></td>
-                                <td><?php echo $voc->getTehty(); ?></td>
-                               
-                        <form method="GET"> 
-                            <td><button type="submit" name="sanastonValintaNappi" value="<?php echo $voc->getSanastotunnus(); ?>" class="btn btn-xs btn-info" formaction="etusivu.php" >Tenttimään</button></td> 
-                        </form>                         
+                                <td><?php echo $data->monestiko[$voc->getSanastotunnus()]; ?></td>
+                                <td><?php echo $voc->getMaara(); ?></td>                                
+                                <td><?php echo $data->parasTulos[$voc->getSanastotunnus()]; ?></td>                            
+                                            
                         </tr>
                     <?php endforeach; ?>                                    
                     </tbody>
@@ -71,3 +69,5 @@
 </table></td>
 </tr>
 </table>
+
+

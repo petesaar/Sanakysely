@@ -1,10 +1,12 @@
 <tr>
     <td width="50%">
+        <form role="form" method="POST">
         <div class="btn-group">
 
-            <button type="button" class="btn btn-default" onclick="location.href = 'muokkaus.php'">Sanastojen hallinta</button>
-            <button type="submit" class="btn btn-default" onclick="alert('Tämä toiminto on vielä työn alla!')">Oppilaiden tulokset</button>
+            <button type="submit" class="btn btn-default" formaction='muokkaus.php'>Sanastojen hallinta</button>
+            <button type="submit" class="btn btn-default" formaction='oppilaat.php'>Oppilaiden tulokset</button>
         </div>
+        </form>
     </td>
 </tr> 
 <tr>

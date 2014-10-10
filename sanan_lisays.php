@@ -11,7 +11,6 @@ $sanastoLista = Sanasto::getKaikkiSanastot();
 $opet = Opettaja::getKaikkiOpettajat();
 $valittu_sanasto = Sanasto::etsiSanasto($_SESSION['muokattava_sanasto']) ;
 $sanalista = Sana::getSanastonSanat($valittu_sanasto->getSanastotunnus());
-//$sanalista = Sana::getSanastonSanat(1);
 
 if (isset($_POST["tallennaSanaNappi"])) {
     $lkm = Sana::etsiSuurin();
@@ -33,7 +32,7 @@ if (isset($_POST["tallennaSanaNappi"])) {
     } else {
         $virheet = $sana->getVirheet();
         naytaNakyma($pohja, $sivu, array(
-            'sana' => new Sana(),
+            'sana' => $sana,
             'virheet' => $virheet,
         ));
     }

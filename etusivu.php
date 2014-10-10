@@ -1,6 +1,7 @@
 <?php
   require_once 'libs/common.php';
   require 'libs/models/sanasto.php';
+  require 'libs/models/oppilas.php';
   
   $pohja = 'opp_pohja.php';
   $sivu = 'opp_sanastot.php';

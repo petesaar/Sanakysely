@@ -1,20 +1,19 @@
 <tr>
     <td width="50%">
+        <form role="form" method="POST">
         <div class="btn-group">
 
             <button type="button" class="btn btn-default" disabled="disabled">Sanastojen hallinta</button>
-            <button type="submit" class="btn btn-default" onclick="alert('Tämä toiminto on vielä työn alla!')">Oppilaiden tulokset</button>
+            <button type="submit" class="btn btn-default" formaction='oppilaat.php'>Oppilaiden tulokset</button>
         </div>
+        </form>
     </td>
 </tr> 
 <tr>
     <td  height="40" colspan="3"></td>
 </tr>
 <tr>
-    <td colspan="3">Opettaja <?php echo $kirjautunut->getNimi(); ?>, valitse listalta sanasto muokkaamista varten tai luo uusi sanasto:</td> 
-<tr>
-    <td><font color="blue">(Huom. arvioija! Viikon 5 palautuksessa täydet CRUD-nelikot on toteutettu tietokohteille 'sanasto' ja  'sana'. Oppilaan puolen toiminnot ovat vielä kesken.)</font> </td>    
-</tr>
+    <td colspan="3">Opettaja <?php echo $kirjautunut->getNimi(); ?>, valitse listalta sanasto muokkaamista varten tai luo uusi sanasto:</td>
 </tr>
 <tr>
     <td height="40" colspan="3">

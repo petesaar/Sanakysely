@@ -23,7 +23,7 @@ sanastotunnus SERIAL PRIMARY KEY NOT NULL,
 nimi varchar(80),
 kieli varchar(12),
 kuvaus varchar(200),
-maara int,
+maara integer,
 tehty date,
 opetunnus integer references opettaja(opettajatunnus)
 );
@@ -46,23 +46,12 @@ viimeksi date
 CREATE TABLE tentti
 (
 tenttitunnus SERIAL PRIMARY KEY NOT NULL,
-suunta boolean,
+suunta integer,
 tulos integer,
 aika timestamp,
-oppilastunnus integer references oppilas(oppilastunnus) 
-);
-
-CREATE TABLE tulos
-(
-tulostunnus SERIAL PRIMARY KEY NOT NULL,
-yritykset integer,
-viimeksi date,
-oppilastunnus integer references oppilas(oppilastunnus),
-tenttitunnus integer references tentti(tenttitunnus)  
-);
-
-CREATE TABLE tenttii
-(
-tenttitunnus integer references tentti(tenttitunnus) ON DELETE cascade,
+oikeinVastatut integer,
+vaarinVastatut integer,
+oppilastunnus integer references oppilas(oppilastunnus) ON DELETE cascade,
 sanastotunnus integer references sanasto(sanastotunnus) ON DELETE cascade 
 );
+

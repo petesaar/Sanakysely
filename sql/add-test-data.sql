@@ -1,7 +1,7 @@
-INSERT INTO oppilas VALUES (0, 'quuppa', 'q', 0, '2014-01-08 04:05:06');
-INSERT INTO oppilas VALUES (1, 'Ana', 'ana', 0, '2014-01-08 04:05:06');
-INSERT INTO oppilas VALUES (2, 'Kaarina', 'salasana', 0, '2014-01-08 04:05:06');
-INSERT INTO oppilas VALUES (3, 'Erkki', 'passu', 0, '2014-01-08 04:05:06');
+INSERT INTO oppilas VALUES (1, 'quuppa', 'q', 0, '2014-01-08 04:05:06');
+INSERT INTO oppilas VALUES (2, 'Ana', 'ana', 0, '2014-01-08 04:05:06');
+INSERT INTO oppilas VALUES (3, 'Kaarina', 'salasana', 0, '2014-01-08 04:05:06');
+INSERT INTO oppilas VALUES (4, 'Erkki', 'passu', 0, '2014-01-08 04:05:06');
 INSERT INTO opettaja VALUES (0, 'Ope', 'ope', '{0, 1, 2}');
 INSERT INTO opettaja VALUES (1, 'Maikka', 'ope', '{0}');
 INSERT INTO sana VALUES (0, 'blue', 'eng-suo', 'sininen', '', 'substantiivi','');
@@ -22,7 +22,7 @@ INSERT INTO sana VALUES (14, 'vector', 'eng-suo', 'vektori', '', 'substantiivi',
 INSERT INTO sana VALUES (15, 'prime number', 'eng-suo', 'alkuluku', '', 'substantiivi','');
 INSERT INTO sana VALUES (16, 'induction', 'eng-suo', 'induktio', '', 'substantiivi','');
 INSERT INTO sana VALUES (17, 'probability integral', 'eng-suo', 'kertymäfunktio', '', 'substantiivi','');
-INSERT INTO sanasto VALUES (1, 'Värit', 'eng-suo', 'Värejä ja sävyjä', 6, '27/09/2014', 0);
+INSERT INTO sanasto VALUES (1, 'Värit', 'eng-suo', 'Värejä ja sävyjä', 7, '27/09/2014', 0);
 INSERT INTO sanasto VALUES (2, 'Tietotekniikka 1', 'eng-suo', 'ICT-perussanastoa', 5, '27/09/2014', 1);
 INSERT INTO sanasto VALUES (3, 'Matikka 1', 'eng-suo', 'Matematiikan termejä', 7, '27/09/2014', 0);
 INSERT INTO kuuluu VALUES (0, 1);

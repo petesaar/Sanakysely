@@ -11,17 +11,37 @@ class Kierros {
     private $suunta;
     private $laskuri = 0;
     private $oikeinVastatut = 0;
+    private $vaarinVastatut = 0;
     private $kysyttavat = array();
     private $vastaukset = array();
+    private $sanaluokka = array();
+    private $tiedetyt = 0;
+    private $ohitetut = 0;
+    private $nro;
+    private $kysyttavienMaara = 0;
+    public static $lisatieto;
+
+    public function __construct($sanasto, $suunta) {
+        $this->sanasto = $sanasto;
+        $this->suunta = $suunta;
+    }
 
     public function getKierrostunnus() {
         return $this->kierrostunnus;
     }
-
+    
+    public function getSuunta() {
+        return $this->suunta;
+    }
+    
     public function getOikeinVastatut() {
         return $this->oikeinVastatut;
     }
 
+    public function getVaarinVastatut() {
+        return $this->vaarinVastatut;
+    }
+    
     public function getTulos() {
         return $this->tulos;
     }
@@ -30,10 +50,34 @@ class Kierros {
         return $this->laskuri;
     }
 
+    public function getNro() {
+        return $this->nro;
+    }
+
+    public function getTiedetyt() {
+        return $this->tiedetyt;
+    }
+
+    public function getOhitetut() {
+        return $this->ohitetut;
+    }
+
+    public function getSanaluokka($nro) {
+        return $this->sanaluokka[$nro];
+    }
+
+    public function getKysyttavienMaara() {
+        $m = count($this->kysyttavat);
+        return $m;
+    }
+
     public function setKierrostunnus($kierrostunnus) {
         $this->kierrostunnus = $kierrostunnus;
     }
-
+    
+    public function setSuunta($suunta) {
+        $this->suunta = $suunta;
+    }
     public function setOikeinVastatut($oikeinVastatut) {
         $this->oikeinVastatut = $oikeinVastatut;
     }
@@ -46,9 +90,16 @@ class Kierros {
         $this->laskuri = $laskuri;
     }
 
-    public function __construct($sanasto, $suunta) {
-        $this->sanasto = $sanasto;
-        $this->suunta = $suunta;
+    public function setNro($nro) {
+        $this->nro = $nro;
+    }
+
+    public function setTiedetyt($tiedetyt) {
+        $this->tiedetyt = $tiedetyt;
+    }
+
+    public function setOhitetut($ohitetut) {
+        $this->ohitetut = $ohitetut;
     }
 
     /* Metodi muodostaa kysyttävien sanojen ja vastausten luettelot valitusta sanastosta */
@@ -64,6 +115,7 @@ class Kierros {
                 $this->vastaukset[] = $sana->getKohde();
                 $this->kysyttavat[] = $sana->getKaannos();
             }
+            $this->sanaluokka[] = $sana->getSluokka();
         }
     }
 
@@ -71,20 +123,63 @@ class Kierros {
         $this->laskuri++;
     }
 
+    /* Arvotaan seuraava sana jäljellä olevien listasta */
+
     public function annaSana() {
-        $moneskoSana = $this->getLaskuri();
-        $this->lisaaLaskuria();
-        return $this->kysyttavat[$moneskoSana];
+        //$moneskoSana = $this->getLaskuri();
+        $k = array_rand($this->kysyttavat);
+        $this->setNro($k);
+        $v = $this->kysyttavat[$k];
+        Kierros::$lisatieto = $this->getSanaluokka($k);
+        //$this->lisaaLaskuria();
+        //return $this->kysyttavat[$moneskoSana];
+        return $v;
     }
 
-    public function tuomitse($vastaus, $nro) {
-        if ($vastaus == $this->vastaukset[$nro-2]) {
-            return "oikea vastaus";
+    public function annaLisatieto() {
+        return Kierros::$lisatieto;
+    }
+
+    /* Tutkitaan onko käyttäjän antama vastaus kelvollinen. Jos on, poistetaan sana kysyttävien listalta.
+     * Huom. Tiedän, että kontrollereissa *ei pitäisi* käsitellä HTML:ää! Tein nyt niin tässä metodissa vain kokeilun (ja kiireen) vuoksi...
+     */
+
+    public function tuomitse($vastaus) {
+        $q = 'Onko sanan "'.$this->kysyttavat[$this->nro].'"'.' käännös '.'"'.$vastaus.'"'.'?  ';
+        if ($vastaus == $this->vastaukset[$this->nro]) {
+            
+            array_splice($this->kysyttavat, $this->nro, 1);
+            array_splice($this->vastaukset, $this->nro, 1);
+            $this->tiedetyt++;
+            $this->setOikeinVastatut($this->tiedetyt);
+            return $q."<br><font color='green' size='6'>   Oikein :-)</font>";
         } else {
-            return "väärä vastaus";
+            $this->vaarinVastatut++;
+            return $q."<br><font color='red' size='6'>   Väärin :-(</font>";
         }
     }
 
+    public function ohitaSana() {
+        $this->ohitetut++;
+        $kyssari = $this->kysyttavat[$this->nro];
+        $spoileri = $this->vastaukset[$this->nro];
+        array_splice($this->kysyttavat, $this->nro, 1);
+        array_splice($this->vastaukset, $this->nro, 1);
 
+        return array($kyssari,$spoileri);
+    }
+public function tallennaTentti(){
+    Tentti::tallennaTentti();
+}
 
+    public static function etsiSuurin() {
+        $kierrosLista = Sana::getKaikkiSanat();
+        $suurin = 0;
+        foreach ($sanaLista as $snsto) {
+            if ($snsto->sanatunnus > $suurin) {
+                $suurin = $snsto->sanatunnus;
+            }
+        }
+        return $suurin;
+    }
 }

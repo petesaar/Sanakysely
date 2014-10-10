@@ -18,7 +18,7 @@ if (onkoKirjautunut() == null) {
 
 <html>
     <head>
-        <title>Oppilaan etusivu</title>
+        <title>Tentti</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <link href="css/bootstrap.css" rel="stylesheet">

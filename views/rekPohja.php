@@ -2,7 +2,7 @@
 
 <html>
     <head>
-        <title>Sanakysely-ohjelman kirjautumissivu</title>
+        <title>Sanakysely-ohjelman rekisteröitymissivu</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width">
         <link href="css/bootstrap.css" rel="stylesheet">
@@ -26,14 +26,7 @@
                 <td  height="40" colspan="3"></td>
             </tr>
             <tr>
-                <td colspan="3">Tervetuloa käyttämään Sanakysely-ohjelmaa! Ole hyvä ja kirjaudu sisään. Jos sinulla ei vielä ole käyttäjätunnusta, rekisteröidy palveluun.</td>
-                <tr>
-                    <td align="center"><br>
-                    <form class="form-horizontal" role="form" action="doLogin.php" method="POST">
-                        <button type="submit" name="rekisterointiNappi" value="rekisterointi" class="btn btn-default">Rekisteröidy</button>
-                    </form>
-                </td>
-                </tr>
+                <td colspan="3">Tervetuloa käyttämään Sanakysely-ohjelmaa! Ole hyvä ja rekisteröidy palveluun.</td>
             </tr>
             <tr>
                 <td  height="40" colspan="3"></td>
@@ -63,5 +56,6 @@
         </table>
     </body>
 </html>
+
 
 

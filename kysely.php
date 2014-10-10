@@ -10,14 +10,21 @@
   $pohja = 'opp_pohja.php';
   $sivu = 'opp_harjoittelu.php';
   $valittu_sanasto = Sanasto::etsiSanasto($_SESSION['muokattava_sanasto']) ;
+  $h = $_SESSION['kirjautunut'];
+  $kirjautunut = unserialize($h);
+  $oppTunnus = $kirjautunut->getOppilastunnus();
+  $monestiko = Tentti::getTentitPerSanasto($valittu_sanasto->getSanastotunnus(), $oppTunnus);
+  $parasTulos = Tentti::getParasTulos($valittu_sanasto->getSanastotunnus(), $oppTunnus);
   
+  /* Tehdään tarvittavia toimia, kun käyttäjä on valinnut kyselyn suunnan */
   if (isset($_GET['suuntaNappi'])) {
     $valittuSuunta = $_GET['suuntaNappi'];
     $_SESSION['suunta'] = $valittuSuunta;    
     $rundi = new Kierros($valittu_sanasto, $valittuSuunta);
+    $rundi->setKierrostunnus(1);
+    $rundi->teeListat();
     $_SESSION['kyselyOlio'] = ($rundi);
-    //$rundi ->teeListat();
-    //$rundi ->teeTesti();
+
     header('Location: kysely_2.php');
     //$teksti = $valittu->getKohde();
     //$_SESSION['muokattava_sana'] = $valittu->getSanatunnus();
@@ -35,4 +42,6 @@
   naytaNakyma($pohja, $sivu, array(
       'testikentta' => "(Muut painikkeet kuin 'Kirjaudu ulos' eivät toimi vielä!)",
       'valittu_sanasto' => $valittu_sanasto,
+      'monestiko' => $monestiko,
+      'paras' => $parasTulos,
   ));

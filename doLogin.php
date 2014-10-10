@@ -6,6 +6,12 @@ require 'libs/models/opettaja.php';
 $pohja = 'kirjautumispohja.php';
 $sivu = 'kirjautumislomake.php';
 
+/* Jos kyseessä on uuden käyttäjän rekisteröityminen: */
+if (isset($_POST["rekisterointiNappi"])) {
+    header('Location: signUp.php');
+}
+
+
 if (empty($_POST["tunnari"])) {
     naytaNakyma($pohja, $sivu, array(
         'virhe' => "Kirjautuminen epäonnistui! Et antanut käyttäjätunnusta.",
@@ -42,3 +48,4 @@ $teacher = Opettaja::etsiOpettajaTunnuksilla($kayttaja, $salasana);
         'virhe' => "Kirjautuminen epäonnistui! Antamasi tunnus tai salasana on väärä.", request
     ));
 }
+

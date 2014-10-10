@@ -1,8 +1,9 @@
 <?php
   require_once 'libs/common.php';
   
-$pohja = 'kirjautumispohja.php';  
-$sivu = 'kirjautumislomake.php';
+$pohja = 'rekPohja.php';  
+$sivu = 'register.php';
 
   naytaNakyma($pohja, $sivu);
+
 

@@ -1,6 +1,4 @@
 DROP TABLE
-tenttii,
-tulos,
 tentti,
 oppilas,
 kuuluu,
