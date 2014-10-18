@@ -1,4 +1,8 @@
 <?php
+
+/* opettaja on malliluokka, joka huolehtii tietokantayhteyksistä opettaja-tauluun
+ * ja tarjoaa metodeja Sanakysely-sovelluksen kontrollereille.
+ */
 require_once 'libs/tietokantayhteys.php';
 class Opettaja {
   
@@ -7,6 +11,7 @@ class Opettaja {
   private $salasana;
   private $tehdyt;  
 
+  /* Kuormitettu konstruktori */
   public function __construct($opettajatunnus, $nimi, $salasana, $tehdyt) {
     $this->opettajatunnus = $opettajatunnus;
     $this->nimi = $nimi;

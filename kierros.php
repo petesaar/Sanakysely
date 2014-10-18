@@ -2,6 +2,11 @@
 
 require_once 'libs/tietokantayhteys.php';
 
+/* Kierros on apuluokka, jota käytetään oppilaan tentin yhteydessä. Kontrollerissa Kysely luodaan
+ * $rundi-niminen olio parametrinä annettujen $sanaston ja $suunnan mukaisesti. $rundi välitetään
+ * Kysely-2 -kontrollerille, joka käyttää Kierroksen metodeja kyselyn toteuttamiseen.
+ */
+
 class Kierros {
 
     private $kierrostunnus;
@@ -29,11 +34,11 @@ class Kierros {
     public function getKierrostunnus() {
         return $this->kierrostunnus;
     }
-    
+
     public function getSuunta() {
         return $this->suunta;
     }
-    
+
     public function getOikeinVastatut() {
         return $this->oikeinVastatut;
     }
@@ -41,7 +46,7 @@ class Kierros {
     public function getVaarinVastatut() {
         return $this->vaarinVastatut;
     }
-    
+
     public function getTulos() {
         return $this->tulos;
     }
@@ -74,10 +79,11 @@ class Kierros {
     public function setKierrostunnus($kierrostunnus) {
         $this->kierrostunnus = $kierrostunnus;
     }
-    
+
     public function setSuunta($suunta) {
         $this->suunta = $suunta;
     }
+
     public function setOikeinVastatut($oikeinVastatut) {
         $this->oikeinVastatut = $oikeinVastatut;
     }
@@ -103,7 +109,6 @@ class Kierros {
     }
 
     /* Metodi muodostaa kysyttävien sanojen ja vastausten luettelot valitusta sanastosta */
-
     public function teeListat() {
         $sanalista = Sana::getSanastonSanat($this->sanasto->getSanastotunnus());
         foreach ($sanalista as $sana) {
@@ -124,41 +129,37 @@ class Kierros {
     }
 
     /* Arvotaan seuraava sana jäljellä olevien listasta */
-
-    public function annaSana() {
-        //$moneskoSana = $this->getLaskuri();
+    public function annaSana() {        
         $k = array_rand($this->kysyttavat);
         $this->setNro($k);
         $v = $this->kysyttavat[$k];
-        Kierros::$lisatieto = $this->getSanaluokka($k);
-        //$this->lisaaLaskuria();
-        //return $this->kysyttavat[$moneskoSana];
+        Kierros::$lisatieto = $this->getSanaluokka($k);        
         return $v;
     }
-
+    
+    /* sanaan liittyviä lisätietoja, tässä versiossa sanaluokka */
     public function annaLisatieto() {
         return Kierros::$lisatieto;
     }
 
     /* Tutkitaan onko käyttäjän antama vastaus kelvollinen. Jos on, poistetaan sana kysyttävien listalta.
-     * Huom. Tiedän, että kontrollereissa *ei pitäisi* käsitellä HTML:ää! Tein nyt niin tässä metodissa vain kokeilun (ja kiireen) vuoksi...
+     * (Huom. Tiedän, että kontrollereissa *ei pitäisi* käsitellä HTML:ää! Tein nyt niin tässä metodissa vain kokeilun vuoksi...)
      */
-
     public function tuomitse($vastaus) {
-        $q = 'Onko sanan "'.$this->kysyttavat[$this->nro].'"'.' käännös '.'"'.$vastaus.'"'.'?  ';
+        $q = 'Onko sanan "' . $this->kysyttavat[$this->nro] . '"' . ' käännös ' . '"' . $vastaus . '"' . '?  ';
         if ($vastaus == $this->vastaukset[$this->nro]) {
-            
             array_splice($this->kysyttavat, $this->nro, 1);
             array_splice($this->vastaukset, $this->nro, 1);
             $this->tiedetyt++;
             $this->setOikeinVastatut($this->tiedetyt);
-            return $q."<br><font color='green' size='6'>   Oikein :-)</font>";
+            return $q . "<br><font color='green' size='6'>   Oikein :-)</font>";
         } else {
             $this->vaarinVastatut++;
-            return $q."<br><font color='red' size='6'>   Väärin :-(</font>";
+            return $q . "<br><font color='red' size='6'>   Väärin :-(</font>";
         }
     }
 
+    /* Kun oppilas painaa ohita-painiketta, eli ei halua ruveta arvailemaan sanaa jota ei tiedä */
     public function ohitaSana() {
         $this->ohitetut++;
         $kyssari = $this->kysyttavat[$this->nro];
@@ -166,12 +167,15 @@ class Kierros {
         array_splice($this->kysyttavat, $this->nro, 1);
         array_splice($this->vastaukset, $this->nro, 1);
 
-        return array($kyssari,$spoileri);
+        return array($kyssari, $spoileri);
     }
-public function tallennaTentti(){
-    Tentti::tallennaTentti();
-}
 
+    /* Kyselyn päätyttyä tallennetaan tulos Tentti-malliluokan avulla */
+    public function tallennaTentti() {
+        Tentti::tallennaTentti();
+    }
+
+    /*
     public static function etsiSuurin() {
         $kierrosLista = Sana::getKaikkiSanat();
         $suurin = 0;
@@ -182,4 +186,5 @@ public function tallennaTentti(){
         }
         return $suurin;
     }
+*/
 }

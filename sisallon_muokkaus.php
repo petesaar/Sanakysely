@@ -1,4 +1,7 @@
 <?php
+
+/* Kontrolleri opettajan sanastonmuokkaussivun näyttämiseen ja muihin toimiin */
+
   require_once 'libs/common.php';
   require 'libs/models/sanasto.php';
   require 'libs/models/sana.php';
@@ -19,6 +22,7 @@
     $valittu_sanasto->paivitaKantaanLkm('-1');
     $_SESSION['ilmoitus'] = "Sana poistettu onnistuneesti.";
     header('Location: sisallon_muokkaus.php');
+    exit(); //jostain syystä vaatii tämän, tai 'ilmoitus'-muuttuja ei toimi kun kontrolleri lataa itsensä uudelleen
   }
   
   if (isset($_GET['sananMuokkausNappi'])) {
@@ -26,11 +30,6 @@
     $teksti = $valittu->getKohde();
     $_SESSION['muokattava_sana'] = $valittu->getSanatunnus();
     header('Location: sanan_muutos.php');
-      //naytaNakyma($pohja, $sivu, array(
-      //'testikentta' => $teksti,
-      //'sanastot' => $sanastoLista,
-      //'opet' => $opet,
-  //));
   }
   
   if (isset($_GET['sanastonPaivitysNappi'])) {

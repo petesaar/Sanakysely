@@ -1,5 +1,8 @@
 <?php
 
+/* Sana on malliluokka, joka huolehtii tietokantayhteyksistä sana-tauluun
+ * ja tarjoaa metodeja Sanakysely-sovelluksen kontrollereille.
+ */
 require_once 'libs/tietokantayhteys.php';
 
 class Sana {
@@ -106,7 +109,6 @@ class Sana {
     }
 
     /* Haetaan kannasta kaikki sana-rivit */
-
     public static function getKaikkiSanat() {
         $sql = "SELECT sanatunnus, kohde, kieli, kaannos, taivutus, sluokka, artikkeli FROM sana ORDER BY kohde";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -129,8 +131,7 @@ class Sana {
         return $tulokset;
     }
 
-    /* Haetaan kannasta kaikki sana-rivit */
-
+    /* Haetaan kannasta kaikki tiettyyn sanastoon kuuluvat sana-rivit */
     public static function getSanastonSanat($sanastotunnus) {
         $sql = "SELECT sana.sanatunnus, kohde, sana.kieli, kaannos, taivutus, sluokka, artikkeli FROM kuuluu "
                 . "JOIN sana ON sana.sanatunnus = kuuluu.sanatunnus JOIN sanasto ON sanasto.sanastotunnus = kuuluu.sanastotunnus WHERE kuuluu.sanastotunnus = ?";
@@ -154,7 +155,6 @@ class Sana {
     }
 
     /* Etsitään suurin sanatunnus */
-
     public static function etsiSuurin() {
         $sanaLista = Sana::getKaikkiSanat();
         $suurin = 0;
@@ -166,8 +166,7 @@ class Sana {
         return $suurin;
     }
 
-    /* Etsitään kannasta sanasto-riviä id:llä */
-
+    /* Etsitään kannasta sana-riviä id:llä */
     public static function etsiSana($sanatunnus) {
         $sql = "SELECT sanatunnus, kohde, kieli, kaannos, taivutus, sluokka, artikkeli FROM sana WHERE sanatunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -191,8 +190,7 @@ class Sana {
         }
     }
 
-    /* Tallennetaan uusi sanasto tietokantaan */
-
+    /* Tallennetaan uusi sana tietokantaan */
     public function lisaaKantaan($sanaId) {
 
         $sql = "INSERT INTO sana(sanatunnus, kohde, kieli, kaannos, taivutus, sluokka, artikkeli) VALUES(?,?,?,?,?,?,?)";
@@ -205,8 +203,7 @@ class Sana {
         return $ok;
     }
 
-    /* Tallennetaan sanan muuttuneet tiedot */
-    
+    /* Tallennetaan sanan muuttuneet tiedot */    
     public function paivitaKantaan() {
         $sql = "UPDATE sana SET kohde = ?, kieli = ?, kaannos= ?, taivutus= ?, sluokka= ?, artikkeli= ? WHERE sanatunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -216,7 +213,6 @@ class Sana {
     }
     
     /* Poistetaan sana */
-
     public function poistaKannasta() {
         $sql = "DELETE FROM sana WHERE sanatunnus=?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -229,13 +225,11 @@ class Sana {
     }
 
     /* Palauttaa true, jos Sanaan syötetyt arvot ovat järkeviä. */
-
     public function onkoKelvollinen() {
         return empty($this->virheet);
     }
 
     /* Palauttaa mahdolliset virheet arrayna */
-
     public function getVirheet() {
         return $this->virheet;
     }

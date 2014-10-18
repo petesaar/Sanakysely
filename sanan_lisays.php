@@ -1,5 +1,7 @@
 <?php
 
+/* Kontrolleri opettajan sananlisäyssivun näyttämiseen ja muihin toimiin */
+
 require_once 'libs/common.php';
 require 'libs/models/sanasto.php';
 require 'libs/models/opettaja.php';

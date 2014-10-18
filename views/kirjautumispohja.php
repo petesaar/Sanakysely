@@ -16,12 +16,10 @@
             </tr>
             <tr>
                 <td colspan="2"><h1>Sanakysely</h1></td>
-
             </tr>
             <tr>
                 <td height="40" colspan="3" scope="col"></td>
             </tr>
-
             <tr>
                 <td  height="40" colspan="3"></td>
             </tr>
@@ -46,12 +44,9 @@
                             <div class="container">
                                 <?php if (!empty($data->virhe)): ?>
                                     <div class="alert alert-danger"><?php echo $data->virhe; ?></div>
-
                                 <?php endif; ?>
                                 <?php
-                                /* HTML-rungon keskellä on sivun sisältö, 
-                                 * joka haetaan sopivasta näkymätiedostosta.
-                                 * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
+                                /* Tähän kohtaan sisältöä joka haetaan sopivasta näkymätiedostosta. Tiedostonimi muuttujassa $sivu.
                                  */
                                 require 'views/' . $sivu;
                                 ?>

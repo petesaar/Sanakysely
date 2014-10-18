@@ -1,5 +1,7 @@
 <?php
 
+/* Kontrolleri opettajan sanastonmuutossivun näyttämiseen ja muihin toimiin */
+
 require_once 'libs/common.php';
 require 'libs/models/sanasto.php';
 require 'libs/models/opettaja.php';
@@ -12,7 +14,6 @@ $tunnus = $_SESSION['muutettava'];
 $muutettavaSanasto = Sanasto::etsiSanasto($tunnus);
 
 if (isset($_POST["tallennaSanastonMuutoksetNappi"])) {
-
     $muutettavaSanasto->setNimi(putsaaString($_POST['sanastonNimi']));
     $muutettavaSanasto->setKieli(putsaaString($_POST['sanastonKielet']));
     $muutettavaSanasto->setKuvaus(putsaaString($_POST['sanastonKuvaus']));

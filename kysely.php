@@ -1,5 +1,7 @@
 <?php
   
+/* Kontrolleri oppilaan tenttisivun näyttämiseen ja muihin toimiin */
+
   require 'libs/models/sanasto.php';
   require 'libs/models/sana.php';
   require 'libs/models/oppilas.php';
@@ -13,7 +15,9 @@
   $h = $_SESSION['kirjautunut'];
   $kirjautunut = unserialize($h);
   $oppTunnus = $kirjautunut->getOppilastunnus();
+  $monestiko = 0; //kuinka monta kertaa oppilas on tenttinyt kyseistä sanastoa
   $monestiko = Tentti::getTentitPerSanasto($valittu_sanasto->getSanastotunnus(), $oppTunnus);
+  $parasTulos = 0; //mikä on toistaiseksi parast tulos valitusta sanastosta
   $parasTulos = Tentti::getParasTulos($valittu_sanasto->getSanastotunnus(), $oppTunnus);
   
   /* Tehdään tarvittavia toimia, kun käyttäjä on valinnut kyselyn suunnan */
@@ -26,17 +30,6 @@
     $_SESSION['kyselyOlio'] = ($rundi);
 
     header('Location: kysely_2.php');
-    //$teksti = $valittu->getKohde();
-    //$_SESSION['muokattava_sana'] = $valittu->getSanatunnus();
-    //header('Location: sanan_muutos.php');
-    //$pohja = 'opp_pohja_2.php';
-    //$sivu = 'opp_round.php';
-      //naytaNakyma($pohja, $sivu, array(
-      //'testikentta' => $valittuSuunta,
-      //'valittu_sanasto' => $valittu_sanasto,
-      //'sanastot' => $sanastoLista,
-      //'opet' => $opet,
-  //));
   }
 
   naytaNakyma($pohja, $sivu, array(

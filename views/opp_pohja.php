@@ -37,9 +37,7 @@ if (onkoKirjautunut() == null) {
                     <form method="GET" onsubmit="return confirm('Haluatko varmasti kirjautua ulos?')"> 
                         <button type="submit" name="ulos" class="btn btn-lg btn-info" formaction="logout.php" >Kirjaudu ulos</button> 
                     </form> 
-
                 </td>
-
             </tr>
             <tr>
                 <td height="40" colspan="3" scope="col"></td>
@@ -50,17 +48,12 @@ if (onkoKirjautunut() == null) {
                         <?php echo $fiba . "<br>"; ?>
                     <?php endforeach; ?>
                 </div></td>
-
         <?php endif; ?>
         <?php
-        /* HTML-rungon keskellä on sivun sisältö, 
-         * joka haetaan sopivasta näkymätiedostosta.
-         * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
+        /* Tähän kohtaan sisältöä joka haetaan sopivasta näkymätiedostosta. Tiedostonimi muuttujassa $sivu.
          */
         require 'views/' . $sivu;
         ?>
     </table>
-
-
 </body>
 </html>

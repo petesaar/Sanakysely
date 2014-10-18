@@ -1,5 +1,7 @@
 <?php
   
+/* Kontrolleri oppilaan juuri suoritetun tentin tulosten näyttämiseen ja muihin toimiin */
+
   require 'libs/models/sanasto.php';
   require 'libs/models/sana.php';
   require 'libs/models/oppilas.php';
@@ -15,9 +17,7 @@
   $kirjautunut = unserialize($h);
   $oppTunnus = $kirjautunut->getOppilastunnus();
   $valittu_oppilas = Oppilas::etsiOppilas($oppTunnus);
-  $aika = date('Y-m-d H:i:s');
-
-  
+  $aika = date('Y-m-d H:i:s');  
   
   $tiedetyt = $rundi->getTiedetyt();
   $ohitetut = $rundi->getOhitetut();

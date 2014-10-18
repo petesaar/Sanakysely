@@ -1,13 +1,18 @@
 <?php
 
+/* Kontrolleri opettajan sanastonlisäyssivun näyttämiseen ja muihin toimiin */
+
 require_once 'libs/common.php';
 require 'libs/models/sanasto.php';
 require 'libs/models/opettaja.php';
 
 $pohja = 'ope_pohja.php';
 $sivu = 'ope_sanaston_lisays.php';
+$h = $_SESSION['kirjautunut'];
+$kirjautunut = unserialize($h);
 $sanastoLista = Sanasto::getKaikkiSanastot();
 $opet = Opettaja::getKaikkiOpettajat();
+$opettaja = $kirjautunut->getOpettajatunnus();
 
 if (isset($_POST["tallennaNappi"])) {
     $lkm = Sanasto::etsiSuurin();
@@ -18,11 +23,11 @@ if (isset($_POST["tallennaNappi"])) {
     $sanasto->setKieli(putsaaString($_POST['sanastonKielet']));
     $sanasto->setKuvaus(putsaaString($_POST['sanastonKuvaus']));
     $sanasto->setMaara(0);
-    $sanasto->setOpetunnus(0);
+    $sanasto->setOpetunnus($opettaja);
 
     if ($sanasto->onkoKelvollinen()) {
         $sanasto->lisaaKantaan();
-        $_SESSION['ilmoitus'] = "Sanasto lisätty onnistuneesti.";
+        $_SESSION['ilmoitus'] = "Sanasto lisätty onnistuneesti. Huomaathan, että sanasto ei näy oppilaalle tentittävänä, ennen kuin siihen on lisätty ainakin yksi sana!";
         header('Location: muokkaus.php');
     } else {
         $virheet = $sanasto->getVirheet();

@@ -1,6 +1,6 @@
 <?php 
 /* 
- * Kirjaudutaan ulos sovelluksesta. 
+ * Kontrolleri; kun kirjaudutaan ulos sovelluksesta. 
 */ 
 session_start(); 
 unset($_SESSION['kirjautunut']); 

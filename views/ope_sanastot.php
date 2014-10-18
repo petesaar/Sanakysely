@@ -1,11 +1,10 @@
 <tr>
     <td width="50%">
         <form role="form" method="POST">
-        <div class="btn-group">
-
-            <button type="button" class="btn btn-default" disabled="disabled">Sanastojen hallinta</button>
-            <button type="submit" class="btn btn-default" formaction='oppilaat.php'>Oppilaiden tulokset</button>
-        </div>
+            <div class="btn-group">
+                <button type="button" class="btn btn-default" disabled="disabled">Sanastojen hallinta</button>
+                <button type="submit" class="btn btn-default" formaction='oppilaat.php'>Oppilaiden tulokset</button>
+            </div>
         </form>
     </td>
 </tr> 
@@ -16,18 +15,16 @@
     <td colspan="3">Opettaja <?php echo $kirjautunut->getNimi(); ?>, valitse listalta sanasto muokkaamista varten tai luo uusi sanasto:</td>
 </tr>
 <tr>
-    <td height="40" colspan="3">
-    
+    <td height="40" colspan="3">    
         <?php if (!empty($_SESSION['ilmoitus'])): ?>
             <div class="alert alert-danger">
                 <?php echo $_SESSION['ilmoitus']; ?>
             </div>
         </td>
-        <?php        
+        <?php
         unset($_SESSION['ilmoitus']);
     endif;
-    ?>        
- 
+    ?> 
 </tr>
 <tr>
     <td colspan="3"><table width="80%" border="1" cellspacing="0" cellpadding="0">
@@ -67,14 +64,14 @@
                     <?php endforeach; ?>                                    
                     </tbody>
                 </table>
-
             </div>
-
         </th>
         <th scope="col"><td align="center">
-            <button type="submit" class="btn btn-default" onclick="location.href = 'sanaston_lisays.php'">Lisää sanasto</button>
+            <form method="GET"> 
+                <button type="submit" name="ulos" class="btn btn-default" formaction="sanaston_lisays.php" >Lisää sanasto</button> 
+            </form>            
         </td>
-        </th>
+    </th>
 </tr>
 </table></td>
 </tr>

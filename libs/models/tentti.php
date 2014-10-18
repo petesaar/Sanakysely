@@ -1,5 +1,8 @@
 <?php
 
+/* Tentti on malliluokka, joka huolehtii tietokantayhteyksistä tentti-tauluun
+ * ja tarjoaa metodeja Sanakysely-sovelluksen kontrollereille.
+ */
 require_once 'libs/tietokantayhteys.php';
 
 class Tentti {
@@ -36,15 +39,15 @@ class Tentti {
     public function getVaarinVastatut() {
         return $this->vaarinVastatut;
     }
-    
+
     public function getOppilasTunnus() {
         return $this->oppilasTunnus;
     }
-     
+
     public function getSanastoTunnus() {
         return $this->sanastoTunnus;
-    }   
-    
+    }
+
     public function setTenttitunnus($tenttitunnus) {
         $this->tenttitunnus = $tenttitunnus;
     }
@@ -68,25 +71,26 @@ class Tentti {
     public function setVaarinVastatut($vaarinVastatut) {
         $this->vaarinVastatut = $vaarinVastatut;
     }
-    
+
     public function setOppilasTunnus($oppilasTunnus) {
         $this->oppilasTunnus = $oppilasTunnus;
     }
-     
+
     public function setSanastoTunnus($sanastoTunnus) {
         $this->sanastoTunnus = $sanastoTunnus;
-    } 
-    public static function tallennaTentti($tenttitunnus, $suunta, $tulos, $aika, $oikeinVastatut, $vaarinVastatut, $oppilas, $sanasto){
-        
+    }
+
+    /* Tallennetaan uusi tentti tietokantaan */
+    public static function tallennaTentti($tenttitunnus, $suunta, $tulos, $aika, $oikeinVastatut, $vaarinVastatut, $oppilas, $sanasto) {
+
         $sql = "INSERT INTO tentti(tenttitunnus, suunta, tulos, aika, oikeinVastatut, vaarinVastatut, oppilastunnus, sanastotunnus) VALUES(?,?,?,?,?,?,?,?)";
         $kysely = getTietokantayhteys()->prepare($sql);
         $ok = $kysely->execute(array($tenttitunnus, $suunta, $tulos, $aika, $oikeinVastatut, $vaarinVastatut, $oppilas, $sanasto));
- 
+
         return $ok;
     }
-    
-        /* Haetaan kannasta kaikki tentti-rivit */
 
+    /* Haetaan kannasta kaikki tentti-rivit */
     public static function getKaikkiTentit() {
         $sql = "SELECT tenttitunnus, suunta, tulos, aika, oikeinVastatut, vaarinVastatut, oppilastunnus, sanastotunnus FROM tentti ORDER BY tenttitunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -109,7 +113,8 @@ class Tentti {
         }
         return $tulokset;
     }
-     
+
+    /* Haetaan kannasta parametrina saadun oppilaan tekemät tentit */
     public static function getOppilaanTentit($oppTunnus) {
         $sql = "SELECT tenttitunnus, suunta, tulos, aika, oikeinVastatut, vaarinVastatut, oppilastunnus, sanastotunnus FROM tentti WHERE oppilastunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -132,7 +137,8 @@ class Tentti {
         }
         return $tulokset;
     }
-    
+
+    /* Opettajan tilastoa varten haetaan kannasta parametrina annetun oppilaan tenttimien sanastojen määrä */
     public static function montakoSanastoaTenttinyt($oppTunnus) {
         $sql = "SELECT count(distinct sanastotunnus) as kpl FROM tentti WHERE oppilastunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -142,9 +148,8 @@ class Tentti {
         $maara = $tulos->kpl;
         return $maara;
     }
-    
-    /* Etsitään suurin tenttitunnus */
 
+    /* Etsitään suurin tenttitunnus */
     public static function etsiSuurin() {
         $tenttiLista = Tentti::getKaikkiTentit();
         $suurin = 0;
@@ -155,22 +160,28 @@ class Tentti {
         }
         return $suurin;
     }
-    
+
+    /* Haetaan kannasta parametrina annetun oppilaan sanastokohtainen tenttien määrä */
     public static function getTentitPerSanasto($sanastotunnus, $oppTunnus) {
         $sql = "SELECT count(*) as maara FROM tentti WHERE sanastotunnus = ? AND oppilastunnus = ?";
-        $kysely = getTietokantayhteys()->prepare($sql);        
+        $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($sanastotunnus, $oppTunnus));
         $tulos = $kysely->fetchObject();
         $maara = $tulos->maara;
         return $maara;
     }
-    
+
+    /* Haetaan kannasta parametrina annetun oppilaan sanastokohtainen paras tenttitulos */
     public static function getParasTulos($sanastotunnus, $oppTunnus) {
         $sql = "SELECT MAX (oikeinVastatut) as paras FROM tentti WHERE sanastotunnus = ? AND oppilastunnus = ?";
-        $kysely = getTietokantayhteys()->prepare($sql);        
+        $kysely = getTietokantayhteys()->prepare($sql);
         $kysely->execute(array($sanastotunnus, $oppTunnus));
         $tulos = $kysely->fetchObject();
         $paras = $tulos->paras;
+        if (!$paras){   //siltä varalta, ettei oikein vastattuja ole laisinkaan
+            $paras = 0;
+        }
         return $paras;
     }
+
 }

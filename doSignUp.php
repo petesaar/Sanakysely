@@ -1,5 +1,7 @@
 <?php
 
+/* Kontrolleri uuden käyttäjän rekisteröitymiseen */
+
 require_once 'libs/common.php';
 require 'libs/models/oppilas.php';
 require 'libs/models/opettaja.php';

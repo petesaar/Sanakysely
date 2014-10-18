@@ -74,15 +74,8 @@
                                         </div>
                                     </div>  
                                 </form>
-
-
                             </div>
-
-
-
-
                         </td>
-
                     </table>
                 </td>
             </tr>

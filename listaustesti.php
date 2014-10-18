@@ -26,8 +26,6 @@ foreach ($kysely->fetchAll(PDO::FETCH_OBJ) as $tulos) {
     $oppilas->setNimi($tulos->nimi);
     $oppilas->setSalasana($tulos->salasana);
 
-    //$array[] = $muuttuja; lisää muuttujan arrayn perään. 
-    //Se vastaa melko suoraan ArrayList:in add-metodia.
     $tulokset[] = $oppilas;
     echo "valmis";
 }

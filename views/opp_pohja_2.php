@@ -25,12 +25,9 @@ if (onkoKirjautunut() == null) {
         <link href="css/bootstrap-theme.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet">
     </head>
-
-        <?php
-        /* HTML-rungon keskellä on sivun sisältö, 
-         * joka haetaan sopivasta näkymätiedostosta.
-         * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
-         */
-        require 'views/' . $sivu;
-        ?>
+    <?php
+    /* Tähän kohtaan sisältöä joka haetaan sopivasta näkymätiedostosta. Tiedostonimi muuttujassa $sivu.
+     */
+    require 'views/' . $sivu;
+    ?>
 </html>

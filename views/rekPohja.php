@@ -42,9 +42,7 @@
 
                                 <?php endif; ?>
                                 <?php
-                                /* HTML-rungon keskellä on sivun sisältö, 
-                                 * joka haetaan sopivasta näkymätiedostosta.
-                                 * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
+                                /* Tähän kohtaan sisältöä joka haetaan sopivasta näkymätiedostosta. Tiedostonimi muuttujassa $sivu.
                                  */
                                 require 'views/' . $sivu;
                                 ?>

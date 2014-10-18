@@ -1,5 +1,4 @@
 <?php
-//require 'libs/models/sanasto.php';
 require_once 'libs/common.php';
 $h = $_SESSION['kirjautunut'];
 $kirjautunut = unserialize($h);
@@ -17,7 +16,6 @@ if (onkoKirjautunut() == null) {
 ?>
 
 <!DOCTYPE html>
-
 <html>
     <head>
         <title>Sanakysely</title>
@@ -35,34 +33,27 @@ if (onkoKirjautunut() == null) {
             <tr>
                 <td colspan="2"><h1>Sanakysely</h1></td>
                 <td width="150" align="center">
-             
-<form method="GET" onsubmit="return confirm('Haluatko varmasti kirjautua ulos?')"> 
-                            <button type="submit" name="ulos" class="btn btn-lg btn-info" formaction="logout.php" >Kirjaudu ulos</button> 
-                        </form> 
-                  
+                    <form method="GET" onsubmit="return confirm('Haluatko varmasti kirjautua ulos?')"> 
+                        <button type="submit" name="ulos" class="btn btn-lg btn-info" formaction="logout.php" >Kirjaudu ulos</button> 
+                    </form> 
                 </td>
-
             </tr>
             <tr>
                 <td height="40" colspan="3" scope="col"></td>
-            </tr>
-            <td height="40" colspan="3">
+            </tr>            
             <?php if (!empty($data->virheet)): ?>
+            <td>
                 <div class="alert alert-danger">
                     <?php foreach ($data->virheet as $fiba): ?>
-                    <?php echo $fiba . "<br>"; ?>
+                        <?php echo $fiba . "<br>"; ?>
                     <?php endforeach; ?>
                 </div></td>
-
-            <?php endif; ?>
-            <?php
-            /* HTML-rungon keskellä on sivun sisältö, 
-             * joka haetaan sopivasta näkymätiedostosta.
-             * Oikean näkymän tiedostonimi on tallennettu muuttujaan $sivu.
-             */
-            require 'views/' . $sivu;
-            ?>
-        </table>   <br><br><br><br>
-
-    </body>
+        <?php endif; ?>
+        <?php
+        /* Tähän kohtaan sisältöä joka haetaan sopivasta näkymätiedostosta. Tiedostonimi muuttujassa $sivu.
+         */
+        require 'views/' . $sivu;
+        ?>
+    </table>   <br><br><br><br>
+</body>
 </html>

@@ -1,5 +1,8 @@
 <?php
 
+/* Sanasto on malliluokka, joka huolehtii tietokantayhteyksistä sanasto-tauluun
+ * ja tarjoaa metodeja Sanakysely-sovelluksen kontrollereille.
+ */
 require_once 'libs/tietokantayhteys.php';
 
 class Sanasto {
@@ -88,7 +91,6 @@ class Sanasto {
     }
 
     /* Haetaan kannasta kaikki sanastorivit */
-
     public static function getKaikkiSanastot() {
         $sql = "SELECT sanastotunnus, nimi, kieli, kuvaus, maara, tehty, opetunnus FROM sanasto ORDER BY nimi";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -112,7 +114,6 @@ class Sanasto {
     }
 
     /* Etsitään kannasta sanasto-riviä id:llä */
-
     public static function etsiSanasto($sanastotunnus) {
         $sql = "SELECT sanastotunnus, nimi, kieli, kuvaus, maara, tehty, opetunnus FROM sanasto WHERE sanastotunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -137,7 +138,6 @@ class Sanasto {
     }
 
     /* Tallennetaan uusi sanasto tietokantaan */
-
     public function lisaaKantaan() {
         $sql = "INSERT INTO sanasto(sanastotunnus, nimi, kieli, kuvaus, maara, tehty, opetunnus) VALUES(?,?,?,?,?,?,?)";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -146,8 +146,7 @@ class Sanasto {
         return $ok;
     }
     
-    /* Tallennetaan sanaston muuttuneet tiedot */
-    
+    /* Tallennetaan sanaston muuttuneet tiedot */    
     public function paivitaKantaan() {
         $sql = "UPDATE sanasto SET nimi = ?, kieli = ?, kuvaus= ? WHERE sanastotunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -156,8 +155,7 @@ class Sanasto {
         return $ok;   
     }
     
-    /* Tallennetaan sanaston sanojen muuttunut lukumäärä */
-    
+    /* Tallennetaan sanaston sanojen muuttunut lukumäärä */    
      public function paivitaKantaanLkm($muutos) {
         $sql = "UPDATE sanasto SET maara = ? WHERE sanastotunnus = ?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -166,8 +164,7 @@ class Sanasto {
         return $ok;   
     } 
     
-    /* Poistetaan sanasto */
-    
+    /* Poistetaan sanasto */    
     public function poistaKannasta() {
         $sql = "DELETE FROM sanasto WHERE sanastotunnus=?";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -175,7 +172,6 @@ class Sanasto {
     }
 
     /* Etsitään suurin sanastotunnus */
-
     public static function etsiSuurin() {
         $sanastoLista = Sanasto::getKaikkiSanastot();
         $suurin = 0;
@@ -188,13 +184,11 @@ class Sanasto {
     }
 
     /* Palauttaa true, jos Sanastoon syötetyt arvot ovat järkeviä. */
-
     public function onkoKelvollinen() {
         return empty($this->virheet);
     }
 
     /* Palauttaa mahdolliset virheet arrayna */
-
     public function getVirheet() {
         return $this->virheet;
     }

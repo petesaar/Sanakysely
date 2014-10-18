@@ -11,7 +11,6 @@
 <tr>
     <td colspan="3">Muuta haluamasi tiedot:</td>               
 </tr>
-
 <tr>
     <td height="40" colspan="3"></td>
 </tr>
@@ -39,16 +38,14 @@
                             <button type="submit" class="btn btn-default" name = "tallennaSanastonMuutoksetNappi" >Tallenna muutokset</button>                             
                         </div>
                     </div>
-
             </form>
-
-
         </div>
         <div class="col-md-offset-2 col-md-10">
-            <button type="submit" class="btn btn-default" onclick="location.href = 'muokkaus.php'">Peruuta</button>
+            <form method="GET"> 
+                <button type="submit" name="peruutus" class="btn btn-default" formaction="muokkaus.php" >Peruuta</button> 
+            </form>            
         </div>
     </th>
-
 </tr>
 </table></td>
 </tr>

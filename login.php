@@ -1,4 +1,7 @@
 <?php
+
+/* Kontrolleri käyttäjän kirjautumiseen */
+
   require_once 'libs/common.php';
   
 $pohja = 'kirjautumispohja.php';  

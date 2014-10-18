@@ -1,5 +1,8 @@
 <?php
 
+/* Oppilas on malliluokka, joka huolehtii tietokantayhteyksistä oppilas-tauluun
+ * ja tarjoaa metodeja Sanakysely-sovelluksen kontrollereille.
+ */
 require_once 'libs/tietokantayhteys.php';
 
 class Oppilas {
@@ -12,7 +15,6 @@ class Oppilas {
     private $virheet = array();
 
     /* kuormitettu konstruktori */
-
     public function __construct($oppilastunnus, $nimi, $salasana, $tehdyt, $viimeksi) {
         $this->oppilastunnus = $oppilastunnus;
         $this->nimi = $nimi;
@@ -74,7 +76,6 @@ class Oppilas {
     }
 
     /* Haetaan kannasta kaikki oppilas-rivit */
-
     public static function getKaikkiOppilaat() {
         $sql = "SELECT oppilastunnus, nimi, salasana, tehdyt, viimeksi from oppilas ORDER BY oppilastunnus";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -90,7 +91,6 @@ class Oppilas {
     }
 
     /* Etsitään kannasta käyttäjäriviä nimellä ja salasanalla */
-
     public static function etsiOppilasTunnuksilla($kayttaja, $salasana) {
         $sql = "SELECT oppilastunnus, nimi, salasana, tehdyt, viimeksi from oppilas where nimi = ? AND salasana = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -110,7 +110,6 @@ class Oppilas {
     }
 
     /* Etsitään kannasta oppilas-riviä id:llä */
-
     public static function etsiOppilas($oppilastunnus) {
         $sql = "SELECT oppilastunnus, nimi, salasana, tehdyt, viimeksi from oppilas where oppilastunnus = ? LIMIT 1";
         $kysely = getTietokantayhteys()->prepare($sql);
@@ -129,7 +128,6 @@ class Oppilas {
     }
     
     /* Etsitään suurin oppilastunnus */
-
     public static function etsiSuurin() {
         $oppilasLista = Oppilas::getKaikkiOppilaat();
         $suurin = 0;
@@ -142,7 +140,6 @@ class Oppilas {
     }
 
     /* Tallennetaan uusi oppilas tietokantaan */
-
     public function lisaaKantaan($nimi, $salasana) {
 
         $sql = "INSERT INTO oppilas(oppilastunnus, nimi, salasana, tehdyt, viimeksi) VALUES(?,?,?,?,?)";
@@ -153,13 +150,11 @@ class Oppilas {
     }
     
     /* Palauttaa true, jos Oppilaaseen syötetyt arvot ovat järkeviä. */
-
     public function onkoKelvollinen() {
         return empty($this->virheet);
     }
 
     /* Palauttaa mahdolliset virheet arrayna */
-
     public function getVirheet() {
         return $this->virheet;
     }

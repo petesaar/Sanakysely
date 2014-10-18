@@ -1,9 +1,9 @@
-INSERT INTO oppilas VALUES (1, 'quuppa', 'q', 0, '2014-01-08 04:05:06');
+INSERT INTO oppilas VALUES (1, 'Quuppa', 'q', 0, '2014-01-08 04:05:06');
 INSERT INTO oppilas VALUES (2, 'Ana', 'ana', 0, '2014-01-08 04:05:06');
 INSERT INTO oppilas VALUES (3, 'Kaarina', 'salasana', 0, '2014-01-08 04:05:06');
 INSERT INTO oppilas VALUES (4, 'Erkki', 'passu', 0, '2014-01-08 04:05:06');
-INSERT INTO opettaja VALUES (0, 'Ope', 'ope', '{0, 1, 2}');
-INSERT INTO opettaja VALUES (1, 'Maikka', 'ope', '{0}');
+INSERT INTO opettaja VALUES (0, 'Ope', 'ope', '{1, 3}');
+INSERT INTO opettaja VALUES (1, 'Maikka', 'maikka', '{2}');
 INSERT INTO sana VALUES (0, 'blue', 'eng-suo', 'sininen', '', 'substantiivi','');
 INSERT INTO sana VALUES (1, 'red', 'eng-suo', 'punainen', '', 'substantiivi','');
 INSERT INTO sana VALUES (2, 'yellow', 'eng-suo', 'keltainen', '', 'substantiivi','');
