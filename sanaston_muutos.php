@@ -30,8 +30,7 @@ if (isset($_POST["tallennaSanastonMuutoksetNappi"])) {
         ));
     }
 }
-    naytaNakyma($pohja, $sivu, array(
-        'testikentta' => "(Muut painikkeet kuin 'Kirjaudu ulos' eivät toimi vielä!)",
+    naytaNakyma($pohja, $sivu, array(        
         'sanasto' => $muutettavaSanasto,
         'sanastot' => $sanastoLista,
         'opet' => $opet,

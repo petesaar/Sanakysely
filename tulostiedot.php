@@ -12,8 +12,7 @@
   $sivu = 'ope_tuloksia.php';
   $sanastoLista = Sanasto::getKaikkiSanastot();
   $opet = Opettaja::getKaikkiOpettajat();
-  $oppilaat = Oppilas::getKaikkiOppilaat();  
-  $teksti = "kokeilu";
+  $oppilaat = Oppilas::getKaikkiOppilaat();    
   $oppilastunnus = $_SESSION['valittu_oppilas'];
   $oppilas = Oppilas::etsiOppilas($oppilastunnus);
 
@@ -23,8 +22,7 @@
     $monestiko[$voc->getSanastotunnus()] = Tentti::getTentitPerSanasto($voc->getSanastotunnus(), $oppilastunnus);
 }
   
-  naytaNakyma($pohja, $sivu, array(
-      'testikentta' => $teksti,
+  naytaNakyma($pohja, $sivu, array(      
       'sanastot' => $sanastoLista,
       'opet' => $opet,
       'oppilas' => $oppilas,

@@ -32,8 +32,7 @@ foreach ($sanastoLista as $voc) {
     $monestiko[$voc->getSanastotunnus()] = Tentti::getTentitPerSanasto($voc->getSanastotunnus(), $oppTunnus);
 }
 
-naytaNakyma($pohja, $sivu, array( 
-    'testikentta' => "(Muut painikkeet kuin 'Kirjaudu ulos' eivät toimi vielä!)",
+naytaNakyma($pohja, $sivu, array(     
     'sanastot' => $sanastoLista,
     'parasTulos' => $parasTulos,
     'monestiko' => $monestiko,

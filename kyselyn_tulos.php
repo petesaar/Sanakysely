@@ -28,7 +28,7 @@
   $parasTulos = Tentti::getParasTulos($valittu_sanasto->getSanastotunnus(), $oppTunnus);
   
   naytaNakyma($pohja, $sivu, array(
-      'testikentta' => "(Muut painikkeet kuin 'Kirjaudu ulos' eivät toimi vielä!)",
+      'testikentta' => "",
       'valittu_sanasto' => $valittu_sanasto,
       'tiedetyt' => $tiedetyt,
       'ohitetut' => $ohitetut,

@@ -12,8 +12,7 @@
   $sanastoLista = Sanasto::getKaikkiSanastot();
   $opet = Opettaja::getKaikkiOpettajat();
   $valittu_sanasto = Sanasto::etsiSanasto($_SESSION['muokattava_sanasto']) ;
-  $sanalista = Sana::getSanastonSanat($valittu_sanasto->getSanastotunnus());
-  $teksti = "kokeilu";
+  $sanalista = Sana::getSanastonSanat($valittu_sanasto->getSanastotunnus());  
     
   if (isset($_GET['sananPoistoNappi'])) {
     $valittu = Sana::etsiSana($_GET['sananPoistoNappi']);
@@ -39,8 +38,7 @@
       
   }  
   
-  naytaNakyma($pohja, $sivu, array(
-      'testikentta' => $teksti,
+  naytaNakyma($pohja, $sivu, array(      
       'sanastot' => $sanastoLista,
       'opet' => $opet,
       'valittu_sanasto' => $valittu_sanasto,

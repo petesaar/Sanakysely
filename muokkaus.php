@@ -9,8 +9,7 @@
   $pohja = 'ope_pohja.php';
   $sivu = 'ope_sanastot.php';
   $sanastoLista = Sanasto::getKaikkiSanastot();
-  $opet = Opettaja::getKaikkiOpettajat();  
-  $teksti = "kokeilu";
+  $opet = Opettaja::getKaikkiOpettajat();    
     
   /* Jos opettaja haluaa poistaa sanaston, eli painaa 'Poista'-nappia */ 
   if (isset($_GET['poistoNappi'])) {
@@ -30,8 +29,7 @@
     header('Location: sisallon_muokkaus.php');
   }
   
-  naytaNakyma($pohja, $sivu, array(
-      'testikentta' => $teksti,
+  naytaNakyma($pohja, $sivu, array(      
       'sanastot' => $sanastoLista,
       'opet' => $opet,
   ));

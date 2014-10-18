@@ -175,16 +175,4 @@ class Kierros {
         Tentti::tallennaTentti();
     }
 
-    /*
-    public static function etsiSuurin() {
-        $kierrosLista = Sana::getKaikkiSanat();
-        $suurin = 0;
-        foreach ($sanaLista as $snsto) {
-            if ($snsto->sanatunnus > $suurin) {
-                $suurin = $snsto->sanatunnus;
-            }
-        }
-        return $suurin;
-    }
-*/
 }

@@ -33,7 +33,7 @@
   }
 
   naytaNakyma($pohja, $sivu, array(
-      'testikentta' => "(Muut painikkeet kuin 'Kirjaudu ulos' eivät toimi vielä!)",
+      'testikentta' => "",
       'valittu_sanasto' => $valittu_sanasto,
       'monestiko' => $monestiko,
       'paras' => $parasTulos,

@@ -29,6 +29,6 @@ if (isset($_GET['sanastonValintaNappi'])) {
 }
 
 naytaNakyma($pohja, $sivu, array(
-    'testikentta' => "(Muut painikkeet kuin 'Kirjaudu ulos' eivät toimi vielä!)",
+    'testikentta' => "",
     'sanastot' => $sanastoLista,
 ));
